@@ -7,8 +7,11 @@ agent:
 execution_time_limit:
   minutes: 120
 global_job_config:
+  secrets:
+  - name: docker-hub
   prologue:
     commands:
+      - echo $DOCKERHUB_PASSWORD | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
       - checkout
       # Semaphore is doing shallow clone on a commit without tags.
       # unshallow it for GIT_VERSION:=$(shell git describe --tags --dirty --always) @ Makefile.common
@@ -52,12 +55,11 @@ blocks:
       - export BRANCH_NAME=$SEMAPHORE_GIT_BRANCH
       - if [ -z "${SEMAPHORE_GIT_PR_NUMBER}" ]; then make image-all cd CONFIRM=true; fi
 
-# build windows release
-- name: "nightly build windows release"
+- name: "build windows archive"
   dependencies: []
   task:
     jobs:
-    - name: "build windows release"
+    - name: "build windows archive"
       commands:
       - export BRANCH_NAME=$SEMAPHORE_GIT_BRANCH
       - make release-windows-archive VERSION=${BRANCH_NAME}
@@ -70,4 +72,4 @@ promotions:
       # If the block has passed and the branch is for master or a release branch then run the pin updates. Note that
       # this doesn't try to restrict which release branches, as the presence of this auto promotion code means that
       # it can handle updating the pins in this fashion.
-      when: "(result = 'passed') and ((branch = 'master') or (branch =~ 'release-v\d*\.\d*'))"
+      when: "(result = 'passed') and ((branch = 'master') or (branch =~ '^release-v\d*\.\d*'))"

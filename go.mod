@@ -1,19 +1,18 @@
 module github.com/projectcalico/node
 
-go 1.14
+go 1.15
 
 require (
-	github.com/aws/aws-sdk-go v1.33.17 // indirect
 	github.com/kelseyhightower/confd v0.0.0-00010101000000-000000000000
 	github.com/onsi/ginkgo v1.14.1
 	github.com/onsi/gomega v1.10.1
 	github.com/pkg/errors v0.9.1
 	github.com/projectcalico/cni-plugin v0.2.1-0.20201009162303-b72446a687e1
-	github.com/projectcalico/felix v0.0.0-20201009103952-bbd5c2b04230
-	github.com/projectcalico/libcalico-go v1.7.2-0.20201006212057-d414dc7c1c75
-	github.com/projectcalico/typha v0.7.3-0.20201007232318-2dba00d728ad
+	github.com/projectcalico/felix v0.0.0-20201106225651-891409f1ec9f
+	github.com/projectcalico/libcalico-go v1.7.2-0.20201104221619-7d5821395f16
+	github.com/projectcalico/typha v0.7.3-0.20201105195546-16a23f5a8879
 	github.com/sirupsen/logrus v1.4.2
-	github.com/vishvananda/netlink v1.0.1-0.20181108222139-023a6dafdcdf
+	github.com/vishvananda/netlink v1.1.0
 	golang.org/x/sync v0.0.0-20200625203802-6e8e738ad208
 	gopkg.in/fsnotify/fsnotify.v1 v1.4.7
 	k8s.io/api v0.17.3
@@ -23,7 +22,7 @@ require (
 
 replace (
 	github.com/Microsoft/hcsshim => github.com/projectcalico/hcsshim v0.8.9-calico
-	github.com/kelseyhightower/confd => github.com/projectcalico/confd v1.0.1-0.20201009104151-01c96102295c
+	github.com/kelseyhightower/confd => github.com/projectcalico/confd v1.0.1-0.20201106081613-0bce91af111d
 
 	github.com/sirupsen/logrus => github.com/projectcalico/logrus v1.0.4-calico
 
